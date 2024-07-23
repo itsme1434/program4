@@ -31,70 +31,68 @@ document.addEventListener('click', function(event) {
 });
     
 document.getElementById("myInput").value = `
-using System;
-class Shape
-{
-    public virtual void Draw()
-    {
-        Console.WriteLine("Drawing a shape");
-    }
-    public virtual void Erase()
-    {
-        Console.WriteLine("Erasing a shape");
-    }
-}
-class Circle : Shape
-{
-    public override void Draw()
-    {
-        Console.WriteLine("Drawing a circle");
-    }
-    public override void Erase()
-    {
-        Console.WriteLine("Erasing a circle");
-    }
-}
-class Triangle : Shape
-{
-    public override void Draw()
-    {
-        Console.WriteLine("Drawing a triangle");
-    }
-
-    public override void Erase()
-    {
-        Console.WriteLine("Erasing a triangle");
-    }
-}
-class Square : Shape
-{
-    public override void Draw()
-    {
-        Console.WriteLine("Drawing a square");
-    }
-
-    public override void Erase()
-    {
-        Console.WriteLine("Erasing a square");
-    }
-}
-class Program
-{
-    static void Main(string[] args)
-    {
-        
-        Shape[] shapes = new Shape[3];
-        shapes[0] = new Circle();
-        shapes[1] = new Triangle();
-        shapes[2] = new Square();
-        foreach (Shape shape in shapes)
-        {
-            shape.Draw();
-            shape.Erase();
-            Console.WriteLine();
-        }
-    }
-}
+In lab4 subfolder, write code in views.py
+from django.shortcuts import render
+def home(request): 
+return render(request,'home.html') 
+def aboutus(request): 
+return render(request,'aboutus.html') 
+def contactus(request):
+return render(request,'contactus.html')
+In the lab4 folder, create a subfolder ‘templates’ and within the templates subfolder 
+create a file ‘layout.html’, ‘home.html’, ‘aboutus.html’, ‘contactus.html’.
+layout.html:
+<html>
+<title>{% block title %} {% endblock %} </title>
+<style type="text/css">
+ nav {background-color: lightblue;padding:10px}
+</style>
+<body>
+<nav>
+ <a href="/home/">Home</a>| 
+ <a href="/aboutus/">About Us</a>|
+ <a href="/contactus/">Contact Us</a>| 
+</nav>
+<section> {% block content %}{% endblock %} </section>
+<footer>
+ <hr>
+ &copy; ISE, Developed by FSD students, Inc. 
+</footer>
+</body>
+</html>
+>python manage.py startapp lab4
+home.html:
+{% extends 'layout.html' %}
+{% block title %}
+Home 
+{% endblock %}
+{% block content %}
+<h2>This is the home page</h2>
+{% endblock %}
+aboutus.html:
+{% extends 'layout.html' %}
+{% block title %}
+About Us 
+{% endblock %}
+{% block content %}
+<h2>We are DJango developers</h2>
+{% endblock %}
+contactus.html:
+{% extends 'layout.html' %}
+{% block title %}
+ Contact us 
+{% endblock %}
+{% block content %}
+<h2>Out phone: 1234567890 <br> Address: Sapthagiri Chikkasandra</h2>
+{% endblock %}
+In the project folder p, write the code into urls.py
+from django.urls import path
+from lab4.views import home, aboutus, contactus
+urlpatterns = [
+path('home/', home),
+path('aboutus/', aboutus),
+path('contactus/', contactus),
+]
 `
 
 function myFunction() {
